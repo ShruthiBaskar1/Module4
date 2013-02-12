@@ -2,20 +2,30 @@
 <html>
 <head>
     <title>M3 Canvas - Justin Miller</title>
+    <script type="application/javascript">
+        function draw() {
+            "use strict";
+            var canvas, ctx;
+            canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                ctx = document.getElementById('canvas').getContext('2d');
+                ctx.beginPath();
+                ctx.strokeStyle = "red";
+                ctx.fillStyle = "blue";
+                ctx.arc(150, 150, 100, 0, Math.PI * 2, true);
+                ctx.moveTo(220, 150);
+                ctx.arc(150, 150, 70, 0, Math.PI, false);
+                ctx.moveTo(130, 130);
+                ctx.arc(120, 130, 10, 0, Math.PI * 2, true);
+                ctx.moveTo(190, 130);
+                ctx.arc(180, 130, 10, 0, Math.PI * 2, true);
+                ctx.stroke();
+            }
+        }
+    </script>
 </head>
-<body>
-<canvas id = "drawRectangle" width = "300" height = "100"
-        style = "border: 1px solid black;">
-    Your browser does not support canvas.
-</canvas>
-<script>
-    var canvas = document.getElementById("drawRectangle");
-    var context = canvas.getContext("2d")
-    context.fillStyle = "yellow";
-    context.fillRect(5, 10, 200, 75);
-    context.strokeStyle = "royalblue";
-    context.lineWidth = 6;
-    context.strokeRect(4, 9, 201, 76);
-</script>
+
+<body onload="draw();">
+<canvas id="canvas" width="300" height="300">Your browser does not support canvas.</canvas>
 </body>
 </html>
