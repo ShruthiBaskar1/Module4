@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>M3 Exercise 12.5 - Justin Miller</title>
+    <!--
+    Page: 420
+    Description:    Write a script that contains a button and a counter in a div. The button's event
+                    handler should increment the counter each time it's clicked.
+    -->
+    <script type="text/javascript">
+        "use strict";
+
+        function incrementFunction() {
+            var counter, value;
+            counter = document.getElementById("counter");
+            value = parseInt(counter.innerHTML, 10);
+            if (value === "NaN") {
+                value = 0;
+            } else {
+                value = value + 1;
+            }
+            counter.innerHTML = value;
+        }
+
+        function start() {
+            var button;
+            button = document.getElementById("incrementButton");
+            button.addEventListener("click", incrementFunction, false);
+        }
+
+        window.addEventListener("load", start, false);
+    </script>
+</head>
+<body>
+<div id="counter">0</div>
+<form action="incrementCounter">
+    <input type="button" id="incrementButton" value="Increment">
+</form>
+
+</body>
+</html>

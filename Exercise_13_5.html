@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>M3 Exercise 13.5 - Justin Miller</title>
+    <!--
+    Page: 443
+    Description:    You have a server side script that cannot handle any ampersands (&) in the form data. Write
+                    a function that converts all ampersands in a form field to " and " when the field loses
+                    focus (blur).
+    -->
+    <style>
+        textarea {
+            width: 300px;
+            height: 100px;
+        }
+
+        label.fixed {
+            width: 4em;
+            float: left;
+        }
+
+        #helpText {
+            font-family: sans-serif;
+            color: blue;
+            margin-top: 10px;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+
+    <script type="text/javascript">
+        "use strict";
+
+        var helpArray = [ "Enter your company name in this input box. Ampersands (&) will be replaced with 'and'",
+            "Enter your e-mail address in the format user@domain.",
+            "Check this box if you liked our site.",
+            "Enter any comments here that you'd like us to read. Ampersands (&) will be replaced with 'and'",
+            "This button submits the form to the server-side script.",
+            "This button clears the form.", "" ];
+        var helpText;
+
+        // utility function to help register events
+        function registerListeners(object, messageNumber) {
+            object.addEventListener("focus",
+                function () {
+                    helpText.innerHTML = helpArray[messageNumber];
+                    object.value = object.value.replace(/&/g, "and");
+                },
+                false);
+            object.addEventListener("blur",
+                function () {
+                    helpText.innerHTML = helpArray[6];
+                    object.value = object.value.replace(/&/g, " and ");
+                }, false);
+        } // end function registerListener
+
+        // initialize helpTextDiv and register event handlers
+        function init() {
+            helpText = document.getElementById("helpText");
+
+            // register listeners
+            registerListeners(document.getElementById("companyName"), 0);
+            registerListeners(document.getElementById("email"), 1);
+            registerListeners(document.getElementById("like"), 2);
+            registerListeners(document.getElementById("comments"), 3);
+            registerListeners(document.getElementById("submit"), 4);
+            registerListeners(document.getElementById("reset"), 5);
+        } // end function init
+
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+<form id="myForm" action="">
+    <p><label class="fixed" for="companyName">Name:</label>
+        <input type="text" id="companyName"
+               placeholder="Enter Company Name:"></p>
+
+    <p><label class="fixed" for="email">E-mail:</label>
+        <input type="email" id="email"
+               placeholder="Enter e-mail address"></p>
+
+    <p><label>Click here if you like this site
+        <input type="checkbox" id="like"></label></p>
+
+    <p><label for="comments">Any comments?</label></p>
+    <textarea id="comments"
+              placeholder="Enter comments here"></textarea>
+
+    <p><input id="submit" type="submit">
+        <input id="reset" type="reset"></p>
+</form>
+<p id="helpText"></p>
+</body>
+</html>
